@@ -65,7 +65,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 if (app.get('env') === 'development') {
   app.use(require('webpack-dev-middleware')(compiler, {
@@ -74,6 +73,8 @@ if (app.get('env') === 'development') {
   }));
   app.use(require('webpack-hot-middleware')(compiler));
 }
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.post('/contact', contactController.contactPost);
 
