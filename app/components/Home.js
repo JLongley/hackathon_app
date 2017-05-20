@@ -1,12 +1,78 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import Messages from './Messages';
+import Article from './Article'
+
+const POLL_INTERVAL = 16000;
 
 class Home extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      articles: [
+
+        {
+          id: "5920aca71020fa0f1dc35e53",
+          _id: "5920aca71020fa0f1dc35e53",
+          title: "some random title",
+          body: "This is the articles content",
+          source: "www.google.com",
+          date: "5/20/2019",
+          tags: [
+            "tag1",
+            "blah"
+            ],
+        },
+        {
+        id: "5920aca71020fa0f1dc35e54",
+        _id: "5920aca71020fa0f1dc35e54",
+        title: "another random title",
+        body: "Different content",
+        source: "www.cnn.com",
+        date: "5/20/2019",
+        tags: [
+          "tag2",
+          "whatever"
+          ],
+        }
+
+      ],
+      customers: ["Trump", "Bill Clinton"]
+    }
+  }
+
+  // loadArticlesFromServer() {
+  //   $.ajax({
+  //     url: this.props.url,
+  //     dataType: 'json',
+  //     success: function(data) {
+  //       this.setState({data: data});
+  //     }.bind(this),
+  //     error: function(xhr, status, err) {
+  //       console.error(this.props.url, status, err.toString());
+  //     }.bind(this)
+  //   });
+  // }
+  // componentDidMount() {
+  //   // this.loadArticlesFromServer();
+  //   // setInterval(this.loadArticlesFromServer, POLL_INTERVAL);
+  // }
+
   render() {
+    const customers = this.state.customers.map((customer) =>
+      <a href="#" key={customer} className="list-group-item">
+        <h4 className="list-group-item-heading">{customer}</h4>
+        <p className="list-group-item-text">...</p>
+      </a>
+    );
+
+    const articles = this.state.articles.map((article) =>
+      <Article key={article.id} {...article}></Article>
+    )
+
     return (
       <div className="container-fluid">
-        <Messages messages={this.props.messages}/>
+        <Messages messages={this.props.messages} />
         <div className="row">
 
 
@@ -14,18 +80,7 @@ class Home extends React.Component {
         <div className="col-sm-2">
           <div className="panel">
             <div className="list-group">
-              <a href="#" className="list-group-item active">
-                <h4 className="list-group-item-heading">Trump</h4>
-                <p className="list-group-item-text">...</p>
-              </a>
-              <a href="#" className="list-group-item">
-                <h4 className="list-group-item-heading">Other guy</h4>
-                <p className="list-group-item-text">...</p>
-              </a>
-              <a href="#" className="list-group-item">
-                <h4 className="list-group-item-heading">Scuba Steve</h4>
-                <p className="list-group-item-text">...</p>
-              </a>
+              {customers}
             </div>
           </div>
         </div>
@@ -58,68 +113,7 @@ class Home extends React.Component {
                   </button>
                 </div>
                 <hr/>
-                
-                <div>
-                  <h2>Story 1 Headline</h2>
-                  <p>Here's a basic description of what happened in the first news article. Some great stuff happened and everyone had an all around good time.</p>
-                  <div>
-                    <span className="badge">Posted 2012-08-02 20:47:04</span>
-                    <div className="pull-right">
-                      <span className="label label-default">bombs</span>
-                      <span className="label label-info">boring</span>
-                      <span className="label label-primary">terrorism</span>
-                      <span className="label label-success">kittens</span>
-                    </div>         
-                  </div>
-                  <div className="well space-above">
-                    <p>Since I am the story in focus, I am going to throw in a few paragraph summary of the article so that you can get a better guess if you want to keep it or not. Lorem Ipsum etc.</p>
-                    <p>Here's the second sentence in the summary.  Since I am the story in focus, I am going to throw in a few paragraph summary of the article so that you can get a better guess if you want to keep it or not. Lorem Ipsum etc.</p>
-                  </div>
-                  <hr/>
-                </div>
-                <div>
-                  <h2>Story 2 Headline</h2>
-                  <p>Here's a basic description of what happened in the first news article. Some great stuff happened and everyone had an all around good time.</p>
-                  <div>
-                    <span className="badge">Posted 2012-08-02 20:47:04</span>
-                    <div className="pull-right">
-                      <span className="label label-default">bombs</span>
-                      <span className="label label-info">boring</span>
-                      <span className="label label-warning">terrorism</span>
-                      <span className="label label-success">kittens</span>
-                    </div>         
-                  </div>
-                  <hr/>
-                </div>
-                <div>
-                  <h2>Story 3 Headline</h2>
-                  <p>Here's a basic description of what happened in the first news article. Some great stuff happened and everyone had an all around good time.</p>
-                  <div>
-                    <span className="badge">Posted 2012-08-02 20:47:04</span>
-                    <div className="pull-right">
-                      <span className="label label-default">bombs</span>
-                      <span className="label label-danger">boring</span>
-                      <span className="label label-primary">terrorism</span>
-                      <span className="label label-success">kittens</span>
-                    </div>         
-                  </div>
-                  <hr/>
-                </div>
-
-                <div>
-                  <h2>Story 4 Headline</h2>
-                  <p>Here's a basic description of what happened in the first news article. Some great stuff happened and everyone had an all around good time.</p>
-                  <div>
-                    <span className="badge">Posted 2012-08-02 20:47:04</span>
-                    <div className="pull-right">
-                      <span className="label label-default">bombs</span>
-                      <span className="label label-danger">boring</span>
-                      <span className="label label-primary">terrorism</span>
-                      <span className="label label-success">kittens</span>
-                    </div>         
-                  </div>
-                </div>
-
+                {articles}
               </div>
             </div>
           </div>
