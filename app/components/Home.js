@@ -7,17 +7,9 @@ import CreateCustomer from './CreateCustomer'
 
 class Home extends React.Component {
 
-  onDelete = (e) => { 
-    e.preventDefault()
-    console.log(e)
-  }
-
   render() {
     const feed = this.props.feed.map((article) =>
       <div key={article.title}>
-        <a href="#" onClick={this.onDelete}>
-          <span className="glyphicon glyphicon-remove"></span>
-        </a>
         <h4>{article.title}</h4>
         <hr />
       </div>
