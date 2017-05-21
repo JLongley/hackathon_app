@@ -7094,3 +7094,18 @@ textarea {
   animation-duration: 0.3s;
   animation-iteration-count: 1;
   animation-timing-function: linear; }
+
+.tinderButton {
+  width: 65px;
+  height: 65px;
+  background: #efefef;
+  top: 5px;
+  border-radius: 50%;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  font-size: 2em; }
+
+.no {
+  color: #c33; }
+
+.yes {
+  color: #3b7; }

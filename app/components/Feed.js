@@ -100,11 +100,11 @@ class Feed extends React.Component {
         {this.props.selectedCustomer &&
         <div>
             <div onKeyPress={this.onKeyPress}>
-              <button type="button" onClick={this.onReject} className="btn btn-danger btn-lg">
-                <span className="glyphicon glyphicon-remove" aria-hidden="true"> </span> Reject
+              <button type="button" onClick={this.onReject} className="tinderButton no">
+                <span className="glyphicon glyphicon-remove" aria-hidden="true"> </span>
               </button>
-              <button type="button" onClick={this.onAccept} className="btn btn-success btn-lg pull-right">
-                <span className="glyphicon glyphicon-ok" aria-hidden="true"> </span> Accept
+              <button type="button" onClick={this.onAccept} className="tinderButton yes pull-right">
+                <span className="glyphicon glyphicon-ok" aria-hidden="true"> </span>
               </button>
             </div>
             <hr/>
