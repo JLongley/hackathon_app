@@ -79,12 +79,12 @@ app.post('/contact', contactController.contactPost);
 // React server rendering
 app.use(function(req, res) {
   var initialState = {
-    feed: {},
     customer: {
       selected: null,
       creating: false,
-      customers: []
-    }
+      customers: [],
+    },
+    feed: []
   };
 
   var store = configureStore(initialState);

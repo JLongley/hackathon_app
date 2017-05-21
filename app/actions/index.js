@@ -16,4 +16,13 @@ const created = (customer) => {
   }
 }
 
-export {creating, created}
+const accept = (article) => {
+  return (dispatch) => {
+    dispatch({
+      type: 'ARTICLE_ACCEPTED',
+      article: article
+    });
+  }
+}
+
+export {creating, created, accept}

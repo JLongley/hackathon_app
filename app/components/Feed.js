@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Article from './Article'
 import ArticlePreview from './ArticlePreview'
+import { accept } from '../actions'
 
 class Feed extends React.Component {
   constructor(props) {
@@ -16,7 +17,6 @@ class Feed extends React.Component {
       url: '/api/articles',
       dataType: 'json',
       success: function(articles) {
-        // if(articles)
         articles[0].expanded = true;
         this.setState({articles: articles});
       }.bind(this),
@@ -28,6 +28,21 @@ class Feed extends React.Component {
 
   componentDidMount() {
     this.loadArticlesFromServer();
+  }
+
+  onReject = (e) => { 
+    e.preventDefault()
+    let articles = this.state.articles;
+    articles.shift();
+    this.setState({articles: articles})
+  }
+
+  onAccept = (e) => {
+    e.preventDefault()
+    this.props.onAccept(this.state.articles[0])
+    let articles = this.state.articles;
+    articles.shift();
+    this.setState({articles: articles})
   }
 
   render() {
@@ -58,10 +73,10 @@ class Feed extends React.Component {
         </div>
 
         <div className="space-above">
-          <button type="button" className="btn btn-danger btn-lg">
+          <button type="button" onClick={this.onReject} className="btn btn-danger btn-lg">
             <span className="glyphicon glyphicon-remove" aria-hidden="true"> </span> Reject
           </button>
-          <button type="button" className="btn btn-success btn-lg pull-right">
+          <button type="button" onClick={this.onAccept} className="btn btn-success btn-lg pull-right">
             <span className="glyphicon glyphicon-ok" aria-hidden="true"> </span> Accept
           </button>
         </div>
@@ -73,10 +88,18 @@ class Feed extends React.Component {
   }
 }
 
-
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAccept: (article) => {
+      dispatch(accept(article))
+    }
+  }
+}
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    selectedArticles: state.selectedArticles
+  };
 };
 
-export default connect(mapStateToProps)(Feed);
+export default connect(mapStateToProps, mapDispatchToProps)(Feed);
