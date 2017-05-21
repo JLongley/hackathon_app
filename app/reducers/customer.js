@@ -16,7 +16,7 @@ export default function messages(state = {}, action) {
     case 'CUSTOMER_CREATED':
       return Object.assign({}, state,{
         creating: false,
-        customers: [...state.customers, {name: action.customerName, id: action.customerId}]
+        customers: [...state.customers, {name: action.customer.name, id: action.customer._id, tags: action.customer.tags}]
       });
     default:
       return state;

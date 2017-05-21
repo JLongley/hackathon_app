@@ -10,8 +10,7 @@ const created = (customer) => {
   return (dispatch) => {
     dispatch({
       type: 'CUSTOMER_CREATED',
-      customerId: customer._id,
-      customerName: customer.name
+      customer: customer
     });
   }
 }

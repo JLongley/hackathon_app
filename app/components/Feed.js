@@ -17,7 +17,6 @@ class Feed extends React.Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    console.log(this.props.selectedCustomer)
     if (this.props.selectedCustomer != nextProps.selectedCustomer && nextProps.selectedCustomer.id) {
       this.loadArticlesFromServer(nextProps.selectedCustomer.id)
     }
@@ -75,7 +74,6 @@ class Feed extends React.Component {
   }
 
   onKeydown = (e) => {
-    console.log('keypress', e.key)
     switch (e.key) {
       case 'ArrowLeft':
         e.preventDefault()

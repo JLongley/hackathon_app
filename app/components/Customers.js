@@ -43,7 +43,7 @@ class Customers extends React.Component {
       if (this.props.selected && this.props.selected.id == customer.id) {
         selected = 'selected'
       }
-      const tags = customer.tags.map(tag => {return (<span className="label label-primary tag">{tag}</span>)}).splice(0,2)
+      const tags = customer.tags && customer.tags.map(tag => {return (<span className="label label-primary tag">{tag}</span>)}).splice(0,2) || []
       return (<a onClick={(e) => {
         e.preventDefault();
         this.props.onSelectCustomer(customer)
