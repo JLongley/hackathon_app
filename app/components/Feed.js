@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Article from './Article'
-import ArticlePreview from './ArticlePreview'
 import { accept } from '../actions'
 
 class Feed extends React.Component {
@@ -44,7 +43,7 @@ class Feed extends React.Component {
 
   onReject = (e) => { 
     e.preventDefault()
-    ths.reject();
+    this.reject();
   }
 
   reject = () => {
@@ -66,12 +65,13 @@ class Feed extends React.Component {
   }
 
   onKeydown = (e) => {
-    e.preventDefault()
     console.log('keypress', e.key)
     switch (e.key) {
       case 'ArrowLeft':
+        e.preventDefault()
         return this.reject();
       case 'ArrowRight':
+        e.preventDefault()
         return this.accept();
       default:
         return;
@@ -79,15 +79,11 @@ class Feed extends React.Component {
   }
 
   render() {
-    let article, previews;
+    let articles;
 
     if (this.state.articles.length) {
-      article = <Article {...this.state.articles[0]}></Article>
-
-      const articles = [...this.state.articles]
-      articles.shift();
-      previews = articles.map((article) =>
-        <ArticlePreview key={article.id} {...article}></ArticlePreview>)
+      articles = this.state.articles.map((article) =>
+        <Article key={article.id} {...article}></Article>)
     }
     return (
       <div>
@@ -102,8 +98,7 @@ class Feed extends React.Component {
             </button>
             </div>
             <hr/>
-            {article}
-            {previews}
+            {articles}
           </div>
           ||
           <div>Select a customer</div>
