@@ -26,7 +26,7 @@ class Article extends React.Component {
     const content = this.state.expanded ? full : preview;
 
     const tags = this.props.tags ? this.props.tags.map(tag =>(
-      <span key={tag} className="label label-primary tag">{tag}</span>
+      <span key={tag} className="label label-info tag">{tag}</span>
     )) : "";
 
     const firstElement = this.props.index === 0;

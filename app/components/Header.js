@@ -7,7 +7,7 @@ class Header extends React.Component {
       <nav className="navbar navbar-inverse navbar-static-top">
         <div className="container">
           <div className="navbar-header">
-            <IndexLink to="/" className="navbar-brand">Tinderella</IndexLink>
+            <IndexLink to="/" className="navbar-brand logo">Triage</IndexLink>
           </div>
         </div>
       </nav>

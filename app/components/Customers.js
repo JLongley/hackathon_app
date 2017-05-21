@@ -48,7 +48,6 @@ class Customers extends React.Component {
         this.props.onSelectCustomer(customer)
       }} key={customer.id} className={`list-group-item hover-link ${selected}`}>
         <h4 className="list-group-item-heading">{customer.name}</h4>
-        <p className="list-group-item-text">...</p>
       </a>)
     });
 
