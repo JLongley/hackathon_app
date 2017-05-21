@@ -11,7 +11,6 @@ var ReactDOM = require('react-dom/server');
 var Router = require('react-router');
 var Provider = require('react-redux').Provider;
 var exphbs = require('express-handlebars');
-var mongoose = require('mongoose');
 var sass = require('node-sass-middleware');
 var webpack = require('webpack');
 var config = require('./webpack.config');
@@ -35,11 +34,6 @@ var app = express();
 
 var compiler = webpack(config);
 
-mongoose.connect(process.env.MONGODB);
-mongoose.connection.on('error', function() {
-  console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
-  process.exit(1);
-});
 
 var hbs = exphbs.create({
   defaultLayout: 'main',
@@ -85,7 +79,12 @@ app.post('/contact', contactController.contactPost);
 // React server rendering
 app.use(function(req, res) {
   var initialState = {
-    messages: {}
+    feed: {},
+    customer: {
+      selected: null,
+      creating: false,
+      customers: []
+    }
   };
 
   var store = configureStore(initialState);

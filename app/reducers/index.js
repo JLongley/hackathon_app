@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import messages from './messages';
+import customer from './customer';
 
 export default combineReducers({
-  messages
+  customer
 });

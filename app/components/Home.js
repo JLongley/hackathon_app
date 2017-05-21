@@ -1,16 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import Messages from './Messages';
 import Article from './Article'
-
-const POLL_INTERVAL = 16000;
+import Customers from './Customers'
 
 class Home extends React.Component {
   constructor() {
     super();
     this.state = {
       articles: [],
-      customers: ["Trump", "Bill Clinton"]
     }
   }
 
@@ -34,12 +31,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const customers = this.state.customers.map((customer) =>
-      <a href="#" key={customer} className="list-group-item">
-        <h4 className="list-group-item-heading">{customer}</h4>
-        <p className="list-group-item-text">...</p>
-      </a>
-    );
+
 
     const articles = this.state.articles.map((article) =>
       <Article key={article.id} {...article}></Article>
@@ -47,17 +39,9 @@ class Home extends React.Component {
 
     return (
       <div className="container-fluid">
-        <Messages messages={this.props.messages} />
         <div className="row">
-
-
-
         <div className="col-sm-2">
-          <div className="panel">
-            <div className="list-group">
-              {customers}
-            </div>
-          </div>
+          <Customers />
         </div>
         <div className="col-sm-10 row">
 
