@@ -14,13 +14,17 @@ var config = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-    })
   ],
   module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        use: [{
+          loader: 'babel-loader',
+        }],
+        exclude: /node_modules/,
+      },
+    ],
     loaders: [
       {
         test: /\.js$/,
@@ -47,15 +51,5 @@ var config = {
   }
 };
 
-if (process.env.NODE_ENV === 'production') {
-  config.plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        screw_ie8: true,
-        warnings: false
-      }
-    })
-  );
-}
 
 module.exports = config;

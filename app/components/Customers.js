@@ -4,6 +4,11 @@ import { connect } from 'react-redux'
 
 class Customers extends React.Component {
 
+
+  onCreateCustomer = (e) => {
+    e.preventDefault()
+  }
+
   render() {
     const customers = this.props.customers.map((customer) =>
       <a href="#" key={customer} className="list-group-item">
@@ -12,10 +17,14 @@ class Customers extends React.Component {
       </a>
     );
 
-    return (<div className="panel">
-      <div className="list-group">
-        {customers}
+    return (
+    <div>
+      <div className="panel">
+        <div className="list-group">
+          {customers}
+        </div>
       </div>
+      <a onClick={this.onCreateCustomer}>Create customer</a>
     </div>)
   }
 }

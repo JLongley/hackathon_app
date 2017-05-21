@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
 
 router.get('/articles', function(req, res, next) {
   request({
-    uri: 'http://ec2-13-58-7-84.us-east-2.compute.amazonaws.com:8080/articles',
+    uri: 'http://ec2-13-58-7-84.us-east-2.compute.amazonaws.com:8080/feed/1',
     qs: {}
   }).pipe(res)
   .on( 'error', function(err) {

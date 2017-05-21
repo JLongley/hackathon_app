@@ -1,42 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import Article from './Article'
 import Customers from './Customers'
+import Feed from './Feed'
+
 
 class Home extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      articles: [],
-    }
-  }
-
-  loadArticlesFromServer() {
-    $.ajax({
-      url: '/api/articles',
-      dataType: 'json',
-      success: function(articles) {
-        // if(articles)
-        articles[0].expanded = true;
-        this.setState({articles: articles});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
-  }
-  componentDidMount() {
-    this.loadArticlesFromServer();
-    // setInterval(this.loadArticlesFromServer, POLL_INTERVAL);
-  }
 
   render() {
-
-
-    const articles = this.state.articles.map((article) =>
-      <Article key={article.id} {...article}></Article>
-    )
-
     return (
       <div className="container-fluid">
         <div className="row">
@@ -48,31 +18,11 @@ class Home extends React.Component {
           <div className="col-sm-8">
             <div className="panel">
               <div className="panel-body">
-
-                <div className="input-group">
-                  <input type="text" className="form-control" placeholder="Search for tags..."/>
-                  <span className="input-group-btn">
-                    <button className="btn btn-default" type="button">Go!</button>
-                  </span>
-                </div>
-
-                <div>
-                  <span className="label label-default">bombs</span>
-                  <span className="label label-info">boring</span>
-                  <span className="label label-primary">terrorism</span>
-                  <span className="label label-success">kittens</span>
-                </div> 
-
-                <div className="space-above">
-                  <button type="button" className="btn btn-danger btn-lg">
-                    <span className="glyphicon glyphicon-remove" aria-hidden="true"> </span> Accept
-                  </button>
-                  <button type="button" className="btn btn-success btn-lg pull-right">
-                    <span className="glyphicon glyphicon-ok" aria-hidden="true"> </span> Reject
-                  </button>
-                </div>
-                <hr/>
-                {articles}
+                {this.props.creatingCustomer &&
+                <div></div>
+                  ||
+                  <Feed />
+                }
               </div>
             </div>
           </div>
@@ -113,7 +63,7 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    messages: state.messages
+    creatingCustomer: state.customer.creating
   };
 };
 
