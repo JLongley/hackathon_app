@@ -34,10 +34,20 @@ class Feed extends React.Component {
 
   componentDidMount() {
     this.loadArticlesFromServer();
+    $(document.body).on('keydown', this.onKeydown);
+
+  }
+
+  componentWillUnMount() {
+    $(document.body).off('keydown', this.onKeydown);
   }
 
   onReject = (e) => { 
     e.preventDefault()
+    ths.reject();
+  }
+
+  reject = () => {
     let articles = this.state.articles;
     articles.shift();
     this.setState({articles: articles})
@@ -45,10 +55,27 @@ class Feed extends React.Component {
 
   onAccept = (e) => {
     e.preventDefault()
+    this.accept();
+  }
+
+  accept = () => {
     this.props.onAccept(this.state.articles[0])
     let articles = this.state.articles;
     articles.shift();
     this.setState({articles: articles})
+  }
+
+  onKeydown = (e) => {
+    e.preventDefault()
+    console.log('keypress', e.key)
+    switch (e.key) {
+      case 'ArrowLeft':
+        return this.reject();
+      case 'ArrowRight':
+        return this.accept();
+      default:
+        return;
+    }
   }
 
   render() {
@@ -65,35 +92,21 @@ class Feed extends React.Component {
     return (
       <div>
         {this.props.selectedCustomer &&
-          <div>
-            <div className="input-group">
-              <input type="text" className="form-control" placeholder="Search for tags..."/>
-              <span className="input-group-btn">
-                <button className="btn btn-default" type="button">Go!</button>
-              </span>
+        <div>
+          <div onKeyPress={this.onKeyPress}>
+            <button type="button" onClick={this.onReject} className="btn btn-danger btn-lg">
+              <span className="glyphicon glyphicon-remove" aria-hidden="true"> </span> Reject
+            </button>
+            <button type="button" onClick={this.onAccept} className="btn btn-success btn-lg pull-right">
+              <span className="glyphicon glyphicon-ok" aria-hidden="true"> </span> Accept
+            </button>
             </div>
-
-          <div>
-            < span className="label label-default">bombs</span>
-            <span className="label label-info">boring</span>
-            <span className="label label-primary">terrorism</span>
-            <span className="label label-success">kittens</span>
+            <hr/>
+            {article}
+            {previews}
           </div>
-
-        <div className="space-above">
-          <button type="button" onClick={this.onReject} className="btn btn-danger btn-lg">
-            <span className="glyphicon glyphicon-remove" aria-hidden="true"> </span> Reject
-          </button>
-          <button type="button" onClick={this.onAccept} className="btn btn-success btn-lg pull-right">
-            <span className="glyphicon glyphicon-ok" aria-hidden="true"> </span> Accept
-          </button>
-          </div>
-          <hr/>
-          {article}
-          {previews}
-        </div>
-        ||
-        <div>Select a customer</div>
+          ||
+          <div>Select a customer</div>
         }
       </div>
     )
