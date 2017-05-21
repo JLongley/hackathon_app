@@ -263,14 +263,8 @@ $c3: #F29492;
 }
 
 .header-link {
-  border-bottom:4px;
+  border-bottom: 4px;
 }
-
-u {
-  text-decoration: none;
-  border-bottom: 1px solid #565656;
-}​
-
 
 .firstElement {
   padding-top: 25px;
@@ -278,7 +272,12 @@ u {
   font-size: 16px;
 }
 
- @import 'base/all';
- @import 'vendor/all';
- @import 'utils/all';
- @import 'components/all';
+.ul {
+  text-decoration: none;
+  border-bottom: 1px solid #565656;
+}
+
+@import 'base/all';
+@import 'vendor/all';
+@import 'utils/all';
+@import 'components/all';

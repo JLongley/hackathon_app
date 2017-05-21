@@ -15,7 +15,9 @@ class Article extends React.Component {
   }
 
   render() {
-    const preview = <p className="space-above">{this.props.body.substring(0,140) + '...'}</p>
+    const firstElement = this.props.index === 0;
+    const previewSize = firstElement ? 500 : 140;
+    const preview = <p className="space-above">{this.props.summary.substring(0,previewSize) + '...'}</p>
 
     const full = <div className="well space-above">
       {this.props.body.split('\n').map((item, key) => {
@@ -29,13 +31,12 @@ class Article extends React.Component {
       <span key={tag} className="label label-info tag">{tag}</span>
     )) : "";
 
-    const firstElement = this.props.index === 0;
     const className = firstElement ? 'firstElement' : '';
     return (
       <div>
         <div className={className} >
           {firstElement &&
-          <h1 className="hover-link" onClick={this.toggle}><u>{this.props.title}</u></h1>
+          <h1 className="hover-link" onClick={this.toggle}><u className="ul">{this.props.title}</u></h1>
           ||
           <h4 className="hover-link" onClick={this.toggle}>{this.props.title}</h4>
           }
