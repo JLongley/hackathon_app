@@ -3,12 +3,14 @@ import { connect } from 'react-redux'
 import Article from './Article'
 import ArticlePreview from './ArticlePreview'
 import { accept } from '../actions'
+import {Loading} from './Loading'
 
 class Feed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       articles: [],
+      loading: false
     }
   }
 
@@ -20,11 +22,12 @@ class Feed extends React.Component {
   }
 
   loadArticlesFromServer(customerId) {
+    this.setState({loading: true})
     $.ajax({
       url: `/api/articles/${customerId}`,
       dataType: 'json',
       success: function(articles) {
-        this.setState({articles: articles});
+        this.setState({loading: false, articles: articles});
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -33,9 +36,7 @@ class Feed extends React.Component {
   }
 
   componentDidMount() {
-    this.loadArticlesFromServer();
     $(document.body).on('keydown', this.onKeydown);
-
   }
 
   componentWillUnMount() {
@@ -93,17 +94,25 @@ class Feed extends React.Component {
       <div>
         {this.props.selectedCustomer &&
         <div>
-          <div onKeyPress={this.onKeyPress}>
-            <button type="button" onClick={this.onReject} className="btn btn-danger btn-lg">
-              <span className="glyphicon glyphicon-remove" aria-hidden="true"> </span> Reject
-            </button>
-            <button type="button" onClick={this.onAccept} className="btn btn-success btn-lg pull-right">
-              <span className="glyphicon glyphicon-ok" aria-hidden="true"> </span> Accept
-            </button>
+            <div onKeyPress={this.onKeyPress}>
+              <button type="button" onClick={this.onReject} className="btn btn-danger btn-lg">
+                <span className="glyphicon glyphicon-remove" aria-hidden="true"> </span> Reject
+              </button>
+              <button type="button" onClick={this.onAccept} className="btn btn-success btn-lg pull-right">
+                <span className="glyphicon glyphicon-ok" aria-hidden="true"> </span> Accept
+              </button>
             </div>
             <hr/>
-            {article}
-            {previews}
+          {this.state.loading && <Loading/> ||
+            <div>
+            {this.state.articles.length &&
+              <div>
+                {article}
+                {previews}
+              </div> || <p>No articles for {this.props.selectedCustomer.name}</p>
+              }
+            </div>
+          }
           </div>
           ||
           <div>Select a customer</div>
