@@ -39,7 +39,7 @@ class Customers extends React.Component {
 
   render() {
     const customers = this.state.customers.map((customer) =>
-      <a onClick={(e) => {e.preventDefault(); this.props.onSelectCustomer(customer)}} key={customer.id} className="list-group-item">
+      <a onClick={(e) => {e.preventDefault(); this.props.onSelectCustomer(customer)}} key={customer.id} className="list-group-item hover-link">
         <h4 className="list-group-item-heading">{customer.name}</h4>
         <p className="list-group-item-text">...</p>
       </a>
@@ -50,9 +50,13 @@ class Customers extends React.Component {
       <div className="panel">
         <div className="list-group">
           {customers}
+          <span className="list-group-item text-center hover-link">
+            <h4 className="list-group-item-heading">
+              <a onClick={this.onCreateCustomer}>Create customer</a>
+            </h4>
+          </span>
         </div>
       </div>
-      <a onClick={this.onCreateCustomer}>Create customer</a>
     </div>)
   }
 }
