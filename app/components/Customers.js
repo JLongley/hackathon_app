@@ -43,11 +43,16 @@ class Customers extends React.Component {
       if (this.props.selected && this.props.selected.id == customer.id) {
         selected = 'selected'
       }
+      const tags = customer.tags.map(tag => {return (<span className="label label-primary tag">{tag}</span>)}).splice(0,2)
       return (<a onClick={(e) => {
         e.preventDefault();
         this.props.onSelectCustomer(customer)
       }} key={customer.id} className={`list-group-item hover-link ${selected}`}>
         <h4 className="list-group-item-heading">{customer.name}</h4>
+        <p className="list-group-item-text">
+          {tags}
+          <span className="label label-primary tag">...</span>
+        </p>
       </a>)
     });
 
