@@ -5977,7 +5977,6 @@ textarea {
 .space-above {
   margin-top: 20px; }
 
-<<<<<<< HEAD
 /*!
  * animate.css -http://daneden.me/animate
  * Version - 3.5.2
@@ -7017,7 +7016,7 @@ textarea {
 
 .slideOutUp {
   animation-name: slideOutUp; }
-=======
+
 .dizzy-gillespie {
   margin: auto;
   filter: saturate(3);
@@ -7075,4 +7074,3 @@ textarea {
     transform: rotate(0deg); }
   100% {
     transform: rotate(-360deg); } }
->>>>>>> dfe3e096aea7016d7dcb1bf59248f1e8b2ee2b1f

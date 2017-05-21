@@ -103,7 +103,7 @@ class Feed extends React.Component {
             <div>
             {this.state.articles.length &&
               <div>
-                {articls}
+                {articles}
               </div> || <p>No articles for {this.props.selectedCustomer.name}</p>
               }
             </div>
