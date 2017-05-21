@@ -6025,14 +6025,14 @@ textarea {
 .header-link {
   border-bottom: 4px; }
 
-u {
-  text-decoration: none;
-  border-bottom: 1px solid #565656; }
-
-​ .firstElement {
+.firstElement {
   padding-top: 25px;
   padding-bottom: 15px;
   font-size: 16px; }
+
+.ul {
+  text-decoration: none;
+  border-bottom: 1px solid #565656; }
 
 .space-above {
   margin-top: 20px; }
