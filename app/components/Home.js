@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import Messages from './Messages';
 import Article from './Article'
+import ArticlePreview from './ArticlePreview'
 
 const POLL_INTERVAL = 16000;
 
@@ -41,9 +42,16 @@ class Home extends React.Component {
       </a>
     );
 
-    const articles = this.state.articles.map((article) =>
-      <Article key={article.id} {...article}></Article>
-    )
+    let article, previews;
+
+    if (this.state.articles.length) {
+      article = <Article {...this.state.articles[0]}></Article>
+
+      const articles = [...this.state.articles]
+      articles.shift();
+      previews = articles.map((article) =>
+      <ArticlePreview key={article.id} {...article}></ArticlePreview>)
+    }
 
     return (
       <div className="container-fluid">
@@ -81,14 +89,15 @@ class Home extends React.Component {
 
                 <div className="space-above">
                   <button type="button" className="btn btn-danger btn-lg">
-                    <span className="glyphicon glyphicon-remove" aria-hidden="true"> </span> Accept
+                    <span className="glyphicon glyphicon-remove" aria-hidden="true"> </span> Reject
                   </button>
                   <button type="button" className="btn btn-success btn-lg pull-right">
-                    <span className="glyphicon glyphicon-ok" aria-hidden="true"> </span> Reject
+                    <span className="glyphicon glyphicon-ok" aria-hidden="true"> </span> Accept
                   </button>
                 </div>
                 <hr/>
-                {articles}
+                {article}
+                {previews}
               </div>
             </div>
           </div>

@@ -13,19 +13,17 @@ class Home extends React.Component {
       <span key={tag} className="label label-primary">{tag}</span>
     )) : "";
 
+    const preview = this.props.body.substring(0,140) + '...';
+
     return (
       <div>
         <h2>{this.props.title}</h2>
+        <p>{preview}</p>
         <div>
           <span className="badge">Posted {this.props.date}</span>
           <div className="pull-right">
             {tags}
           </div>
-        </div>
-        <div className="well space-above">
-          {this.props.body.split('\n').map((item, key) => {
-            return <span key={key}>{item}<br/></span>
-          })}
         </div>
         <hr/>
       </div>
