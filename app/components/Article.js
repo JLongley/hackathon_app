@@ -1,13 +1,11 @@
 import React from 'react';
 
-
-class Home extends React.Component {
+class Article extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       expanded: false
     };
-
   }
 
   toggle = () => { 
@@ -31,21 +29,29 @@ class Home extends React.Component {
       <span key={tag} className="label label-primary">{tag}</span>
     )) : "";
 
-
+    const firstElement = this.props.index === 0;
+    const className = firstElement ? 'firstElement' : '';
     return (
       <div>
-        <h2 className="hover-link" onClick={this.toggle}>{this.props.title}</h2>
-        <div>
-          <span className="badge">Posted {this.props.date}</span>
-          <div className="pull-right">
-            {tags}
+        <div className={className} >
+          {firstElement &&
+          <h1 className="hover-link" onClick={this.toggle}><u>{this.props.title}</u></h1>
+          ||
+          <h4 className="hover-link" onClick={this.toggle}>{this.props.title}</h4>
+          }
+          <div>
+            <span className="badge">Posted {this.props.date}</span>
+            <div className="pull-right">
+              {tags}
+            </div>
           </div>
+          {content}
         </div>
-        {content}
         <hr/>
+        {firstElement && <br />}
       </div>
     );
   }
 }
 
-export default Home;
+export default Article;

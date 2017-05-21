@@ -10,7 +10,8 @@ export default function messages(state = {}, action) {
       });
     case 'SELECT_CUSTOMER':
       return Object.assign({}, state,{
-        selected: action.customer
+        selected: action.customer,
+        creating: false
       });
     case 'CUSTOMER_CREATED':
       return Object.assign({}, state,{

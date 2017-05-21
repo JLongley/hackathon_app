@@ -1,0 +1,31 @@
+// .accept-leave {
+//   animation-name: bounceOutRight;
+// }
+
+// .accept-leave-active {
+//   animation-name: bounceOutRight;
+// }
+
+// bounceOutRight
+
+.accept-leave {
+  -webkit-animation-name: bounceOutRight;
+  -webkit-animation-duration: 0.3s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: linear;
+  animation-name: bounceOutRight;
+  animation-duration: 0.3s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+}
+
+.reject-leave {
+  -webkit-animation-name: bounceOutLeft;
+  -webkit-animation-duration: 0.3s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: linear;
+  animation-name: bounceOutLeft;
+  animation-duration: 0.3s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+}

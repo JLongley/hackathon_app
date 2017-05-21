@@ -4,12 +4,15 @@ import Article from './Article'
 import { accept } from '../actions'
 import {Loading} from './Loading'
 
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
+
 class Feed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       articles: [],
-      loading: false
+      loading: false,
+      accept: true,
     }
   }
 
@@ -50,7 +53,10 @@ class Feed extends React.Component {
   reject = () => {
     let articles = this.state.articles;
     articles.shift();
-    this.setState({articles: articles})
+    this.setState({
+      articles: articles,
+      accept: false
+    });
   }
 
   onAccept = (e) => {
@@ -62,7 +68,10 @@ class Feed extends React.Component {
     this.props.onAccept(this.state.articles[0])
     let articles = this.state.articles;
     articles.shift();
-    this.setState({articles: articles})
+    this.setState({
+      articles: articles,
+      accept: true
+    });
   }
 
   onKeydown = (e) => {
@@ -83,19 +92,19 @@ class Feed extends React.Component {
     let articles;
 
     if (this.state.articles.length) {
-      articles = this.state.articles.map((article) =>
-        <Article key={article.id} {...article}></Article>)
+      articles = this.state.articles.map((article, index) =>
+        <Article key={article.id} index={index} {...article}></Article>)
     }
     return (
       <div>
         {this.props.selectedCustomer &&
         <div>
             <div onKeyPress={this.onKeyPress}>
-              <button type="button" onClick={this.onReject} className="btn btn-danger btn-lg">
-                <span className="glyphicon glyphicon-remove" aria-hidden="true"> </span> Reject
+              <button type="button" onClick={this.onReject} className="tinderButton no">
+                <span className="glyphicon glyphicon-remove" aria-hidden="true"> </span>
               </button>
-              <button type="button" onClick={this.onAccept} className="btn btn-success btn-lg pull-right">
-                <span className="glyphicon glyphicon-ok" aria-hidden="true"> </span> Accept
+              <button type="button" onClick={this.onAccept} className="tinderButton yes pull-right">
+                <span className="glyphicon glyphicon-ok" aria-hidden="true"> </span>
               </button>
             </div>
             <hr/>
@@ -103,7 +112,11 @@ class Feed extends React.Component {
             <div>
             {this.state.articles.length &&
               <div>
+              <ReactCSSTransitionGroup
+                transitionName={this.state.accept ? "accept" : "reject"}
+                transitionLeaveTimeout={300}>
                 {articles}
+              </ReactCSSTransitionGroup>
               </div> || <p>No articles for {this.props.selectedCustomer.name}</p>
               }
             </div>

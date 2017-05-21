@@ -7,6 +7,17 @@ import CreateCustomer from './CreateCustomer'
 
 class Home extends React.Component {
 
+  export() {
+    var csvContent = "data:text/csv;charset=utf-8,";
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "topSecret.pdf");
+    document.body.appendChild(link); // Required for FF
+
+    link.click();
+  }
+
   render() {
     const feed = this.props.feed.map((article) =>
       <div key={article.title}>
@@ -43,7 +54,7 @@ class Home extends React.Component {
                 
                 {feed}
 
-                <button type="button" className="btn btn-primary btn-lg">
+                <button type="button" className="btn btn-primary btn-lg" onClick={this.export}>
                   <span className="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Export
                 </button>
               </div>
