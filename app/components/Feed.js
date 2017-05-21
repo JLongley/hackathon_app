@@ -13,6 +13,7 @@ class Feed extends React.Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
+    console.log(this.props.selectedCustomer)
     if (this.props.selectedCustomer != nextProps.selectedCustomer && nextProps.selectedCustomer.id) {
       this.loadArticlesFromServer(nextProps.selectedCustomer.id)
     }
@@ -23,7 +24,6 @@ class Feed extends React.Component {
       url: `/api/articles/${customerId}`,
       dataType: 'json',
       success: function(articles) {
-        articles[0].expanded = true;
         this.setState({articles: articles});
       }.bind(this),
       error: function(xhr, status, err) {
