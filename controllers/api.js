@@ -8,9 +8,9 @@ router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
 
-router.get('/articles', function(req, res, next) {
+router.get('/articles/:id', function(req, res, next) {
   request({
-    uri: 'http://ec2-52-15-229-70.us-east-2.compute.amazonaws.com:8080/feed/1',
+    uri: `http://ec2-52-15-229-70.us-east-2.compute.amazonaws.com:8080/feed/${req.params.id}`,
     qs: {}
   }).pipe(res)
   .on( 'error', function(err) {

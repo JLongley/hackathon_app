@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import {creating} from '../actions'
+import {creating, selectCustomer} from '../actions'
 import axios from 'axios'
 
 class Customers extends React.Component {
@@ -37,10 +37,13 @@ class Customers extends React.Component {
     this.loadCustomer();
   }
 
+  onCustomerClick = () => {
+
+  }
 
   render() {
     const customers = this.state.customers.map((customer) =>
-      <a href="#" key={customer.id} className="list-group-item">
+      <a onClick={(e) => {e.preventDefault(); this.props.onSelectCustomer(customer)}} key={customer.id} className="list-group-item">
         <h4 className="list-group-item-heading">{customer.name}</h4>
         <p className="list-group-item-text">...</p>
       </a>
@@ -62,6 +65,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onCreateCustomer: () => {
       dispatch(creating())
+    },
+    onSelectCustomer: (customer) => {
+      dispatch(selectCustomer(customer))
     }
   }
 }

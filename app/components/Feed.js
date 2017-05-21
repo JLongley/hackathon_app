@@ -11,9 +11,15 @@ class Feed extends React.Component {
     }
   }
 
-  loadArticlesFromServer() {
+  componentWillReceiveProps = (nextProps) => {
+    if (this.props.selectedCustomer != nextProps.selectedCustomer && nextProps.selectedCustomer.id) {
+      this.loadArticlesFromServer(nextProps.selectedCustomer.id)
+    }
+  }
+
+  loadArticlesFromServer(customerId) {
     $.ajax({
-      url: '/api/articles',
+      url: `/api/articles/${customerId}`,
       dataType: 'json',
       success: function(articles) {
         // if(articles)
@@ -43,31 +49,37 @@ class Feed extends React.Component {
     }
     return (
       <div>
-        <div className="input-group">
-          <input type="text" className="form-control" placeholder="Search for tags..."/>
-          <span className="input-group-btn">
-                    <button className="btn btn-default" type="button">Go!</button>
-                  </span>
-        </div>
+        {this.props.selectedCustomer &&
+          <div>
+            <div className="input-group">
+              <input type="text" className="form-control" placeholder="Search for tags..."/>
+              <span className="input-group-btn">
+                <button className="btn btn-default" type="button">Go!</button>
+              </span>
+            </div>
 
-        <div>
-          <span className="label label-default">bombs</span>
-          <span className="label label-info">boring</span>
-          <span className="label label-primary">terrorism</span>
-          <span className="label label-success">kittens</span>
-        </div>
+          < div >
+            < span className="label label-default">bombs</span>
+            <span className="label label-info">boring</span>
+            <span className="label label-primary">terrorism</span>
+            <span className="label label-success">kittens</span>
+          </div>
 
-        <div className="space-above">
-          <button type="button" className="btn btn-danger btn-lg">
-            <span className="glyphicon glyphicon-remove" aria-hidden="true"> </span> Reject
-          </button>
-          <button type="button" className="btn btn-success btn-lg pull-right">
-            <span className="glyphicon glyphicon-ok" aria-hidden="true"> </span> Accept
-          </button>
+          <div className="space-above">
+            <button type="button" className="btn btn-danger btn-lg">
+              <span className="glyphicon glyphicon-remove" aria-hidden="true"> </span> Reject
+            </button>
+            <button type="button" className="btn btn-success btn-lg pull-right">
+              <span className="glyphicon glyphicon-ok" aria-hidden="true"> </span> Accept
+            </button>
+          </div>
+          <hr/>
+          {article}
+          {previews}
         </div>
-        <hr/>
-        {article}
-        {previews}
+        ||
+        <div>Select a customer</div>
+        }
       </div>
     )
   }
@@ -76,7 +88,9 @@ class Feed extends React.Component {
 
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    selectedCustomer: state.customer.selected,
+  };
 };
 
 export default connect(mapStateToProps)(Feed);

@@ -16,4 +16,13 @@ const created = (customer) => {
   }
 }
 
-export {creating, created}
+const selectCustomer = (customer) => {
+  return (dispatch) => {
+    dispatch({
+      type: 'SELECT_CUSTOMER',
+      customer,
+    });
+  }
+}
+
+export {creating, created, selectCustomer}
