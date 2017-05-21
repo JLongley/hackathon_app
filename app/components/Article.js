@@ -9,23 +9,28 @@ class Home extends React.Component {
 
   render() {
 
-    const tags = this.props.tags.map(tag =>(
+    const tags = this.props.tags ? this.props.tags.map(tag =>(
       <span key={tag} className="label label-primary">{tag}</span>
-    ))
+    )) : "";
+
+    const preview = this.props.body.substring(0,140) + '...';
+
+    const fullArticle = this.props.expanded ? 
+      <div className="well space-above">
+        <p>{this.props.body}</p>
+      </div> : ""
 
     return (
       <div>
         <h2>{this.props.title}</h2>
-        <p>{this.props.body}</p>
+        <p>{preview}</p>
         <div>
           <span className="badge">Posted {this.props.date}</span>
           <div className="pull-right">
             {tags}
-          </div>         
+          </div>
         </div>
-        <div className="well space-above">
-          <p>{this.props.body}</p>
-        </div>
+        {fullArticle}
         <hr/>
       </div>
     );
@@ -33,20 +38,3 @@ class Home extends React.Component {
 }
 
 export default Home;
-
-
-// <div>
-//   <h2>{article.title}</h2>
-//   <p>{article.body}</p>
-//   <div>
-//     <span className="badge">Posted {article.date}</span>
-//     <div className="pull-right">
-
-//       <span className="label label-primary">{article.tags}</span>
-//     </div>         
-//   </div>
-//   <div className="well space-above">
-//     <p>{article.body}</p>
-//   </div>
-//   <hr/>
-// </div>

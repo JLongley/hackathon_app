@@ -24,6 +24,7 @@ require('babel-core/register');
 require('babel-polyfill');
 
 // Controllers
+var api = require('./controllers/api');
 var contactController = require('./controllers/contact');
 
 // React and Server-Side Rendering
@@ -75,6 +76,9 @@ if (app.get('env') === 'development') {
 }
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+// app.get('/api', apiController.apiGet);
+app.use('/api', api);
 
 app.post('/contact', contactController.contactPost);
 

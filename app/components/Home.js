@@ -9,54 +9,29 @@ class Home extends React.Component {
   constructor() {
     super();
     this.state = {
-      articles: [
-
-        {
-          id: "5920aca71020fa0f1dc35e53",
-          _id: "5920aca71020fa0f1dc35e53",
-          title: "some random title",
-          body: "This is the articles content",
-          source: "www.google.com",
-          date: "5/20/2019",
-          tags: [
-            "tag1",
-            "blah"
-            ],
-        },
-        {
-        id: "5920aca71020fa0f1dc35e54",
-        _id: "5920aca71020fa0f1dc35e54",
-        title: "another random title",
-        body: "Different content",
-        source: "www.cnn.com",
-        date: "5/20/2019",
-        tags: [
-          "tag2",
-          "whatever"
-          ],
-        }
-
-      ],
+      articles: [],
       customers: ["Trump", "Bill Clinton"]
     }
   }
 
-  // loadArticlesFromServer() {
-  //   $.ajax({
-  //     url: this.props.url,
-  //     dataType: 'json',
-  //     success: function(data) {
-  //       this.setState({data: data});
-  //     }.bind(this),
-  //     error: function(xhr, status, err) {
-  //       console.error(this.props.url, status, err.toString());
-  //     }.bind(this)
-  //   });
-  // }
-  // componentDidMount() {
-  //   // this.loadArticlesFromServer();
-  //   // setInterval(this.loadArticlesFromServer, POLL_INTERVAL);
-  // }
+  loadArticlesFromServer() {
+    $.ajax({
+      url: '/api/articles',
+      dataType: 'json',
+      success: function(articles) {
+        // if(articles)
+        articles[0].expanded = true;
+        this.setState({articles: articles});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  }
+  componentDidMount() {
+    this.loadArticlesFromServer();
+    // setInterval(this.loadArticlesFromServer, POLL_INTERVAL);
+  }
 
   render() {
     const customers = this.state.customers.map((customer) =>
