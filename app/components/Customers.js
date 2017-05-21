@@ -37,10 +37,6 @@ class Customers extends React.Component {
     this.loadCustomer();
   }
 
-  onCustomerClick = () => {
-
-  }
-
   render() {
     const customers = this.state.customers.map((customer) =>
       <a onClick={(e) => {e.preventDefault(); this.props.onSelectCustomer(customer)}} key={customer.id} className="list-group-item">
