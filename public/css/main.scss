@@ -251,9 +251,6 @@ textarea {
   text-transform: uppercase;
 }
 
- @import 'base/all';
- @import 'vendor/all';
-
 $c1: #114357;
 $c2: #826C75;
 $c3: #F29492;
@@ -304,3 +301,8 @@ $c3: #F29492;
   0% {transform: rotate(0deg)}
   100% {transform: rotate(-360deg)}
 }
+
+
+ @import 'base/all';
+ @import 'vendor/all';
+ @import 'utils/all';

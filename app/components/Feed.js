@@ -4,12 +4,15 @@ import Article from './Article'
 import { accept } from '../actions'
 import {Loading} from './Loading'
 
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
+
 class Feed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       articles: [],
-      loading: false
+      loading: false,
+      accept: true,
     }
   }
 
@@ -50,7 +53,10 @@ class Feed extends React.Component {
   reject = () => {
     let articles = this.state.articles;
     articles.shift();
-    this.setState({articles: articles})
+    this.setState({
+      articles: articles,
+      accept: false
+    });
   }
 
   onAccept = (e) => {
@@ -62,7 +68,10 @@ class Feed extends React.Component {
     this.props.onAccept(this.state.articles[0])
     let articles = this.state.articles;
     articles.shift();
-    this.setState({articles: articles})
+    this.setState({
+      articles: articles,
+      accept: true
+    });
   }
 
   onKeydown = (e) => {
@@ -103,7 +112,11 @@ class Feed extends React.Component {
             <div>
             {this.state.articles.length &&
               <div>
+              <ReactCSSTransitionGroup
+                transitionName={this.state.accept ? "accept" : "reject"}
+                transitionLeaveTimeout={300}>
                 {articles}
+              </ReactCSSTransitionGroup>
               </div> || <p>No articles for {this.props.selectedCustomer.name}</p>
               }
             </div>
