@@ -32,7 +32,7 @@ class Home extends React.Component {
 
     return (
       <div>
-        <a onClick={this.toggle}><h2>{this.props.title}</h2></a>
+        <h2 className="hover-link" onClick={this.toggle}>{this.props.title}</h2>
         <div>
           <span className="badge">Posted {this.props.date}</span>
           <div className="pull-right">
