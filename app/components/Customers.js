@@ -38,12 +38,19 @@ class Customers extends React.Component {
   }
 
   render() {
-    const customers = this.state.customers.map((customer) =>
-      <a onClick={(e) => {e.preventDefault(); this.props.onSelectCustomer(customer)}} key={customer.id} className="list-group-item hover-link">
+    const customers = this.state.customers.map((customer) => {
+      let selected = '';
+      if (this.props.selected && this.props.selected.id == customer.id) {
+        selected = 'selected'
+      }
+      return (<a onClick={(e) => {
+        e.preventDefault();
+        this.props.onSelectCustomer(customer)
+      }} key={customer.id} className={`list-group-item hover-link ${selected}`}>
         <h4 className="list-group-item-heading">{customer.name}</h4>
         <p className="list-group-item-text">...</p>
-      </a>
-    );
+      </a>)
+    });
 
     return (
     <div>
@@ -74,7 +81,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    customers: state.customer.customers || []
+    customers: state.customer.customers || [],
+    selected: state.customer.selected
   };
 };
 
