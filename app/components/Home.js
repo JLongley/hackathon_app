@@ -8,14 +8,21 @@ import CreateCustomer from './CreateCustomer'
 class Home extends React.Component {
 
   render() {
+    const feed = this.props.feed.map((article) =>
+      <div key={article.title}>
+        <h4>{article.title}</h4>
+        <hr />
+      </div>
+    )
+
     return (
       <div className="container-fluid">
         <div className="row">
         <div className="col-sm-2">
           <Customers />
         </div>
-        <div className="col-sm-10 row">
 
+        <div className="col-sm-10 row">
           <div className="col-sm-8">
             <div className="panel">
               <div className="panel-body">
@@ -34,15 +41,7 @@ class Home extends React.Component {
                 <h1>Trump Stories</h1>
                 <hr/>
                 
-                <h4>Headline of an interesting article</h4>
-                <p>This is a description of an article that I decided was relevant</p>
-                <hr/>
-                <h4>Headline of another interesting article</h4>
-                <p>This is a description of an article that I decided was relevant</p>
-                <hr/>
-                <h4>Headline of a third article</h4>
-                <p>This is a description of an article that I decided was relevant</p>
-                <hr/>
+                {feed}
 
                 <button type="button" className="btn btn-primary btn-lg">
                   <span className="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Export
@@ -50,12 +49,7 @@ class Home extends React.Component {
               </div>
             </div>
           </div>
-
-
-
         </div>
-
-
         </div>
       </div>
     );
@@ -64,7 +58,8 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    creatingCustomer: state.customer.creating
+    creatingCustomer: state.customer.creating,
+    feed: state.feed
   };
 };
 

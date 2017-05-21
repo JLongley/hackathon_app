@@ -13,7 +13,6 @@ export default function messages(state = {}, action) {
         selected: action.customer
       });
     case 'CUSTOMER_CREATED':
-      console.log(state)
       return Object.assign({}, state,{
         creating: false,
         customers: [...state.customers, {name: action.customerName, id: action.customerId}]
