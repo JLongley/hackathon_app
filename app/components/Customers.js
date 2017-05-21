@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux'
-
+import {creating} from '../actions'
 
 class Customers extends React.Component {
 
 
   onCreateCustomer = (e) => {
     e.preventDefault()
+    this.props.onCreateCustomer()
   }
 
   render() {
@@ -29,10 +30,18 @@ class Customers extends React.Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onCreateCustomer: () => {
+      dispatch(creating())
+    }
+  }
+}
+
 const mapStateToProps = (state) => {
   return {
     customers: ["Trump", "Bill Clinton"]
   };
 };
 
-export default connect(mapStateToProps)(Customers);
+export default connect(mapStateToProps, mapDispatchToProps)(Customers);

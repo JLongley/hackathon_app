@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import Customers from './Customers'
 import Feed from './Feed'
+import CreateCustomer from './CreateCustomer'
 
 
 class Home extends React.Component {
@@ -19,7 +20,7 @@ class Home extends React.Component {
             <div className="panel">
               <div className="panel-body">
                 {this.props.creatingCustomer &&
-                <div></div>
+                  <CreateCustomer />
                   ||
                   <Feed />
                 }

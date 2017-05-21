@@ -18,4 +18,13 @@ router.get('/articles', function(req, res, next) {
   });
 });
 
+
+router.post('/customers', function(req, res, next) {
+  console.log(req.body)
+  request({url: 'http://ec2-13-58-7-84.us-east-2.compute.amazonaws.com:8080/customers', json: {customer: req.body}, method: 'POST'}, function(err, resp, body) {
+    if (err) {return res.status(500).send(err)}
+    res.json(body)
+  })
+});
+
 module.exports = router;

@@ -11,6 +11,7 @@
     "test:server": "mocha test/server --recursive --compilers js:babel-register"
   },
   "dependencies": {
+    "axios": "^0.16.1",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
     "babel-plugin-react-transform": "^2.0.2",
