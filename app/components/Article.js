@@ -1,6 +1,5 @@
 import React from 'react';
 
-const POLL_INTERVAL = 16000;
 
 class Home extends React.Component {
   constructor(props) {

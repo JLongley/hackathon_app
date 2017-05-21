@@ -84,7 +84,7 @@ app.use(function(req, res) {
       selected: null,
       creating: false,
       customers: []
-    }
+    },
   };
 
   var store = configureStore(initialState);
