@@ -21,8 +21,8 @@ class Home extends React.Component {
         <div className="col-sm-2">
           <Customers />
         </div>
-        <div className="col-sm-10 row">
 
+        <div className="col-sm-10 row">
           <div className="col-sm-8">
             <div className="panel">
               <div className="panel-body">

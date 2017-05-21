@@ -1,19 +1,47 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import {creating} from '../actions'
+import axios from 'axios'
 
 class Customers extends React.Component {
 
+  constructor(props) {
+    super(props)
+    this.state ={customers:props.customers}
+  }
 
   onCreateCustomer = (e) => {
     e.preventDefault()
     this.props.onCreateCustomer()
   }
 
+  loadCustomer= () => {
+    const setState = this.setState;
+    axios.get('/api/customers')
+      .then((response) => {
+        this.setState({customers: response.data})
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.customers != this.props.customers) {
+      const customers = [...this.state.customers, ...nextProps.customers]
+      this.setState({customers})
+    }
+  }
+
+  componentDidMount() {
+    this.loadCustomer();
+  }
+
+
   render() {
-    const customers = this.props.customers.map((customer) =>
-      <a href="#" key={customer} className="list-group-item">
-        <h4 className="list-group-item-heading">{customer}</h4>
+    const customers = this.state.customers.map((customer) =>
+      <a href="#" key={customer.id} className="list-group-item">
+        <h4 className="list-group-item-heading">{customer.name}</h4>
         <p className="list-group-item-text">...</p>
       </a>
     );
@@ -40,7 +68,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    customers: ["Trump", "Bill Clinton"]
+    customers: state.customer.customers || []
   };
 };
 
